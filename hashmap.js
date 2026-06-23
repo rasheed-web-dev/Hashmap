@@ -1,8 +1,19 @@
+class HashNode {
+  constructor(key = null, value = null) {
+    this.value = value;
+    this.key = key;
+    this.next = null;
+  }
+}
+
 class HashMap {
   constructor() {
     this.capacity = 16;
     this.loadFactor = 0.75;
-    this.map = {};
+    this.map = [];
+    for (let i = 0; i < this.capacity; i++) {
+      this.map.push(new HashNode());
+    }
   }
 
   hash(key) {
@@ -16,12 +27,22 @@ class HashMap {
     return hashCode;
   }
 
-  set(key, value) {}
+  set(key, value) {
+    let currentNode = this.map[this.hash(key)];
+    while (currentNode.next != null) {
+      currentNode = currentNode.next;
+      if (currentNode.key == key) {
+        currentNode.value = value;
+        return;
+      }
+    }
+    const newNode = new HashNode(key, value);
+    currentNode.next = newNode;
+  }
 }
 
 const h = new HashMap();
-h.set("hello", "first word");
+h.set("Sita", "first word");
 h.set("helo", "second word");
-h.set("hello", "second word");
+h.set("Rama", "second word");
 console.log(h.map);
-console.log(h.keys);
