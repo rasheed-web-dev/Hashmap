@@ -2,9 +2,14 @@ class HashMap {
   constructor() {
     this.capacity = 16;
     this.loadFactor = 0.75;
+    this.keys = [];
+    this.map = {};
   }
 
   hash(key) {
+    if (!this.keys.includes(key)) {
+      this.keys.push(key);
+    }
     let hashCode = 0;
 
     const primeNumber = 31;
@@ -14,7 +19,19 @@ class HashMap {
 
     return hashCode;
   }
+
+  set(key, value) {
+    const exists = this.map[this.hash(key)];
+    if (!exists) {
+      this.map[this.hash(key)] = value;
+    } else {
+    }
+  }
 }
 
 const h = new HashMap();
-console.log(h.hash("bob"));
+h.set("hello", "first word");
+h.set("helo", "second word");
+h.set("hello", "second word");
+console.log(h.map);
+console.log(h.keys);
