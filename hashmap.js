@@ -10,6 +10,7 @@ class HashMap {
   constructor() {
     this.capacity = 16;
     this.loadFactor = 0.75;
+    this.items = 0;
     this.load = 0;
     this.buckets = [];
     for (let i = 0; i < this.capacity; i++) {
@@ -30,8 +31,9 @@ class HashMap {
 
   set(key, value) {
     let currentNode = this.buckets[this.hash(key)];
-    if (currentNode.next == null) {
-      this.load++;
+    if (!this.has(key)) {
+      this.items++;
+      this.load = this.items / this.capacity;
     }
     while (currentNode.next != null) {
       currentNode = currentNode.next;
