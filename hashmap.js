@@ -34,6 +34,13 @@ class HashMap {
     if (!this.has(key)) {
       this.items++;
       this.load = this.items / this.capacity;
+      if (this.load > this.loadFactor) {
+        for (let i = 0; i < this.capacity; i++) {
+          this.buckets.push(new HashNode());
+        }
+        this.capacity = this.capacity * 2;
+        this.load = this.items / this.capacity;
+      }
     }
     while (currentNode.next != null) {
       currentNode = currentNode.next;
