@@ -43,6 +43,20 @@ class HashMap {
     const newNode = new HashNode(key, value);
     currentNode.next = newNode;
   }
+
+  get(key) {
+    let currentNode = this.buckets[this.hash(key)];
+    if (currentNode.next == null) {
+      return null;
+    }
+    while (currentNode.next != null) {
+      currentNode = currentNode.next;
+      if (currentNode.key == key) {
+        return currentNode.value;
+      }
+    }
+    return null;
+  }
 }
 
 const h = new HashMap();
@@ -50,3 +64,4 @@ h.set("Sita", "first word");
 h.set("helo", "second word");
 h.set("Rama", "second word");
 console.log(h.buckets);
+console.log(h.get("Rama"));
