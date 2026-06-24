@@ -11,9 +11,9 @@ class HashMap {
     this.capacity = 16;
     this.loadFactor = 0.75;
     this.load = 0;
-    this.map = [];
+    this.buckets = [];
     for (let i = 0; i < this.capacity; i++) {
-      this.map.push(new HashNode());
+      this.buckets.push(new HashNode());
     }
   }
 
@@ -29,7 +29,7 @@ class HashMap {
   }
 
   set(key, value) {
-    let currentNode = this.map[this.hash(key)];
+    let currentNode = this.buckets[this.hash(key)];
     if (currentNode.next == null) {
       this.load++;
     }
@@ -49,4 +49,4 @@ const h = new HashMap();
 h.set("Sita", "first word");
 h.set("helo", "second word");
 h.set("Rama", "second word");
-console.log(h.map);
+console.log(h.buckets);
