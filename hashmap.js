@@ -124,6 +124,17 @@ class HashMap {
     }
     return valuesArr;
   }
+
+  entries() {
+    let pairsArr = [];
+    for (let bucket of this.buckets) {
+      while (bucket.next != null) {
+        bucket = bucket.next;
+        pairsArr.push([bucket.key, bucket.value]);
+      }
+    }
+    return pairsArr;
+  }
 }
 
 const h = new HashMap();
@@ -132,3 +143,4 @@ h.set("helo", "second word");
 h.set("Rama", "second word");
 console.log(h.keys());
 console.log(h.values());
+console.log(h.entries());
