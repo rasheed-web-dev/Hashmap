@@ -85,6 +85,8 @@ class HashMap {
       prevNode = prevNode.next;
     }
     prevNode.next = currentNode.next;
+    this.items--;
+    this.load = this.items / this.capacity;
     return true;
   }
 
