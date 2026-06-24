@@ -85,6 +85,17 @@ class HashMap {
     prevNode.next = currentNode.next;
     return true;
   }
+
+  length() {
+    let count = 0;
+    for (let bucket of this.buckets) {
+      while (bucket.next != null) {
+        count++;
+        bucket = bucket.next;
+      }
+    }
+    console.log(count);
+  }
 }
 
 const h = new HashMap();
