@@ -137,10 +137,4 @@ class HashMap {
   }
 }
 
-const h = new HashMap();
-h.set("Sita", "first word");
-h.set("helo", "second word");
-h.set("Rama", "second word");
-console.log(h.keys());
-console.log(h.values());
-console.log(h.entries());
+export { HashMap };
