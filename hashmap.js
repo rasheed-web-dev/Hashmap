@@ -71,6 +71,20 @@ class HashMap {
     }
     return false;
   }
+
+  remove(key) {
+    if (!this.has(key)) {
+      return false;
+    }
+    let currentNode = this.buckets[this.hash(key)].next;
+    let prevNode = this.buckets[this.hash(key)];
+    while (currentNode.key != key) {
+      currentNode = currentNode.next;
+      prevNode = prevNode.next;
+    }
+    prevNode.next = currentNode.next;
+    return true;
+  }
 }
 
 const h = new HashMap();
