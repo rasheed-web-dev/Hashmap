@@ -96,10 +96,16 @@ class HashMap {
     }
     console.log(count);
   }
+
+  clear() {
+    for (let bucket of this.buckets) {
+      bucket.next = null;
+    }
+  }
 }
 
 const h = new HashMap();
 h.set("Sita", "first word");
 h.set("helo", "second word");
 h.set("Rama", "second word");
-console.log(h.buckets);
+h.length();
