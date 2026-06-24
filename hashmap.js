@@ -102,10 +102,33 @@ class HashMap {
       bucket.next = null;
     }
   }
+
+  keys() {
+    let keysArr = [];
+    for (let bucket of this.buckets) {
+      while (bucket.next != null) {
+        bucket = bucket.next;
+        keysArr.push(bucket.key);
+      }
+    }
+    return keysArr;
+  }
+
+  values() {
+    let valuesArr = [];
+    for (let bucket of this.buckets) {
+      while (bucket.next != null) {
+        bucket = bucket.next;
+        valuesArr.push(bucket.value);
+      }
+    }
+    return valuesArr;
+  }
 }
 
 const h = new HashMap();
 h.set("Sita", "first word");
 h.set("helo", "second word");
 h.set("Rama", "second word");
-h.length();
+console.log(h.keys());
+console.log(h.values());
