@@ -94,7 +94,7 @@ class HashMap {
         bucket = bucket.next;
       }
     }
-    console.log(count);
+    return count;
   }
 
   clear() {
