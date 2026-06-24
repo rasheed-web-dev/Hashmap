@@ -13,8 +13,26 @@ class HashMap {
     this.items = 0;
     this.load = 0;
     this.buckets = [];
+    this.emptyAndFill();
+  }
+
+  emptyAndFill() {
+    this.buckets = [];
     for (let i = 0; i < this.capacity; i++) {
       this.buckets.push(new HashNode());
+    }
+  }
+
+  resize() {
+    let old = this.buckets;
+    this.capacity = this.capacity * 2;
+    this.load = this.items / this.capacity;
+    this.emptyAndFill();
+    for (let bucket of old) {
+      while (bucket.next != null) {
+        bucket = bucket.next;
+        this.set(bucket.key, bucket.value);
+      }
     }
   }
 
@@ -30,18 +48,14 @@ class HashMap {
   }
 
   set(key, value) {
-    let currentNode = this.buckets[this.hash(key)];
     if (!this.has(key)) {
       this.items++;
       this.load = this.items / this.capacity;
       if (this.load > this.loadFactor) {
-        for (let i = 0; i < this.capacity; i++) {
-          this.buckets.push(new HashNode());
-        }
-        this.capacity = this.capacity * 2;
-        this.load = this.items / this.capacity;
+        this.resize();
       }
     }
+    let currentNode = this.buckets[this.hash(key)];
     while (currentNode.next != null) {
       currentNode = currentNode.next;
       if (currentNode.key == key) {
@@ -111,10 +125,10 @@ class HashMap {
   clear() {
     for (let bucket of this.buckets) {
       bucket.next = null;
-      this.capacity = 16;
-      this.load = 0;
-      this.items = 0;
     }
+    this.capacity = 16;
+    this.load = 0;
+    this.items = 0;
   }
 
   keys() {
