@@ -111,6 +111,9 @@ class HashMap {
   clear() {
     for (let bucket of this.buckets) {
       bucket.next = null;
+      this.capacity = 16;
+      this.load = 0;
+      this.items = 0;
     }
   }
 
